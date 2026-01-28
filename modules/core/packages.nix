@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   programs = {
     neovim = {
       enable = true;
@@ -56,6 +55,7 @@
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
     libnotify # For Notifications
+    libwacom # for wacom tablet support
     lm_sensors # Used For Getting Hardware Temps
     lolcat # Add Colors To Your Terminal Command Output
     lshw # Detailed Hardware Information
@@ -77,7 +77,7 @@
     usbutils # Good Tools For USB Devices
     uwsm # Universal Wayland Session Manager (optional must be enabled)
     v4l-utils # Used For Things Like OBS Virtual Camera
-    waypaper  # wallpaper changer
+    waypaper # wallpaper changer
     warp-terminal # Terminal with AI support build in
     wget # Tool For Fetching Files With Links
     ytmdl # Tool For Downloading Audio From YouTube

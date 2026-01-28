@@ -21,21 +21,20 @@
     #};
   };
 
-  outputs =
-    {
-      nixpkgs,
-      home-manager,
-      nix-flatpak,
-      ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
-    host = "zaneyos-24-vm";
-    profile = "vm";
-      username = "dwilliams";
+  outputs = {
+    nixpkgs,
+    home-manager,
+    nix-flatpak,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    host = "my-desktop";
+    profile = "my-desktop";
+    username = "david";
 
-      # Deduplicate nixosConfigurations while preserving the top-level 'profile'
-      mkNixosConfig = gpuProfile: nixpkgs.lib.nixosSystem {
+    # Deduplicate nixosConfigurations while preserving the top-level 'profile'
+    mkNixosConfig = gpuProfile:
+      nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit inputs;
@@ -48,14 +47,13 @@
           nix-flatpak.nixosModules.nix-flatpak
         ];
       };
-    in
-    {
-      nixosConfigurations = {
-        amd = mkNixosConfig "amd";
-        nvidia = mkNixosConfig "nvidia";
-        nvidia-laptop = mkNixosConfig "nvidia-laptop";
-        intel = mkNixosConfig "intel";
-        vm = mkNixosConfig "vm";
-      };
+  in {
+    nixosConfigurations = {
+      amd = mkNixosConfig "amd";
+      nvidia = mkNixosConfig "nvidia";
+      nvidia-laptop = mkNixosConfig "nvidia-laptop";
+      intel = mkNixosConfig "intel";
+      vm = mkNixosConfig "vm";
     };
+  };
 }
